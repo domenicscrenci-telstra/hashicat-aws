@@ -13,7 +13,7 @@ provider "aws" {
 
 module "challenge3module" {
   source  = "app.terraform.io/domorg/challenge3module/aws"
-  version = "1.0.0"
+  version = "2.0.0"
   prefix = "domenic-screnci"
 }
 
@@ -30,7 +30,7 @@ module "challenge3module" {
 # Add execute permissions to our scripts.
 # Run the deploy_app.sh script.
 resource "null_resource" "configure-cat-app" {
-  depends_on = [aws_eip_association.hashicat]
+  depends_on = [module.challenge3module]
 
   triggers = {
     build_number = timestamp()
@@ -43,8 +43,8 @@ resource "null_resource" "configure-cat-app" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = tls_private_key.hashicat.private_key_pem
-      host        = aws_eip.hashicat.public_ip
+      private_key = module.challenge3module.hashicat.private_key_pem
+      host        = module.challenge3module.public_ip
     }
   }
 
@@ -65,8 +65,8 @@ resource "null_resource" "configure-cat-app" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = tls_private_key.hashicat.private_key_pem
-      host        = aws_eip.hashicat.public_ip
+      private_key = module.challenge3module.private_key_pem
+      host        = module.challenge3module.public_ip
     }
   }
 }
