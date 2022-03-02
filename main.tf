@@ -43,7 +43,7 @@ resource "null_resource" "configure-cat-app" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = module.challenge3module.hashicat.private_key_pem
+      private_key = module.challenge3module.private_key_pem
       host        = module.challenge3module.public_ip
     }
   }
