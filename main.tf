@@ -13,7 +13,7 @@ provider "aws" {
 
 module "challenge3module" {
   source  = "app.terraform.io/domorg/challenge3module/aws"
-  version = "2.0.0"
+  version = "3.0.0"
   prefix = "domenic-screnci"
 }
 
