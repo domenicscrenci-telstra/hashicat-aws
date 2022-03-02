@@ -11,6 +11,12 @@ provider "aws" {
   region  = var.region
 }
 
+module "challenge3module" {
+  source  = "app.terraform.io/domorg/challenge3module/aws"
+  version = "1.0.0"
+  prefix = "domenic-screnci"
+}
+
 # We're using a little trick here so we can run the provisioner without
 # destroying the VM. Do not do this in production.
 
